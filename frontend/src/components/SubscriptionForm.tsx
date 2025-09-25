@@ -154,15 +154,25 @@ export function SubscriptionForm({ onSubscribed }: SubscriptionFormProps) {
               autoComplete="email"
               placeholder="you@example.com"
               className="subscription-input w-full rounded-2xl border px-4 py-3 pr-12 placeholder:text-slate-500 shadow-inner focus:outline-none focus:ring-2"
-              ref={inputRef}
               onKeyDown={handleKeyDown}
-              {...register("email", {
-                required: "이메일을 입력해주세요.",
-                pattern: {
-                  value: /\S+@\S+\.\S+/, 
-                  message: "올바른 이메일 형식이 아닙니다.",
-                },
-              })}
+              {
+                ...(() => {
+                  const { ref: formRef, ...rest } = register("email", {
+                    required: "이메일을 입력해주세요.",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "올바른 이메일 형식이 아닙니다.",
+                    },
+                  });
+                  return {
+                    ...rest,
+                    ref: (el: HTMLInputElement | null) => {
+                      formRef(el);
+                      inputRef.current = el;
+                    },
+                  } as const;
+                })()
+              }
               disabled={isSubmitting}
             />
             {feedback && !isError && (
