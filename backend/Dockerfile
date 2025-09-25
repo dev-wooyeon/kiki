@@ -1,19 +1,18 @@
-# Multi-stage build for Spring Boot (JDK 17)
-
-FROM gradle:8.7-jdk17-alpine AS build
+# 빌드 스테이지
+FROM gradle:8.9-jdk17 AS build
 WORKDIR /workspace
 COPY . .
-RUN gradle :build -x test --no-daemon
+RUN gradle build -x test --no-daemon
 
-FROM eclipse-temurin:17-jre-alpine AS runtime
+# 런타임 스테이지
+FROM amazoncorretto:17 AS runtime
 WORKDIR /app
 
-# Copy built jar
+# 빌드 결과 복사
 COPY --from=build /workspace/build/libs/*.jar /app/app.jar
 
-# Environment (override in runtime via env vars)
+# 환경 변수 & 포트
 ENV SERVER_PORT=8080
 EXPOSE 8080
 
 ENTRYPOINT ["java","-jar","/app/app.jar"]
-
