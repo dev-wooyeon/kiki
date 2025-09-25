@@ -1,0 +1,40 @@
+spring:
+  # Test Database Configuration (H2 in-memory)
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  
+  # JPA Configuration for tests
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  
+  # Disable mail for tests
+  mail:
+    host: localhost
+    port: 25
+    username: test
+    password: test
+
+# Logging for tests
+logging:
+  level:
+    com.kiki: DEBUG
+    org.springframework.mail: WARN
+    org.hibernate.SQL: DEBUG
+
+# Test-specific properties
+kiki:
+  scraping:
+    interval: 5000 # 5 seconds for tests
+    retry-attempts: 1
+    retry-delay: 100
+  
+  email:
+    from: test@kiki.com

@@ -1,0 +1,19 @@
+app = "kiki-backend"
+primary_region = "nrt"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[env]
+  SERVER_PORT = "8080"
+  # Spring application.yml에서 읽도록 필요값은 런타임 시 fly secrets로 주입하세요.
+  # ALLOWED_ORIGINS, DB_USERNAME, DB_PASSWORD, MAIL_USERNAME, MAIL_PASSWORD, EMAIL_FROM, OPENAI_API_KEY 등
+

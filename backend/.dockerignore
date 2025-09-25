@@ -1,0 +1,13 @@
+build/
+.gradle/
+.idea/
+.vscode/
+**/.env*
+src/test/
+logs/
+*.log
+*.tmp
+*.temp
+src/main/resources/application-local.yml
+src/main/resources/application-*.local.yml
+
