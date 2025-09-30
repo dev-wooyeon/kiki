@@ -43,7 +43,7 @@ spring:
   
   h2:
     console:
-      enabled: ${H2_CONSOLE_ENABLED:false}
+      enabled: ${H2_CONSOLE_ENABLED:true}
       path: ${H2_CONSOLE_PATH:/h2-console}
       settings:
         web-allow-others: ${H2_CONSOLE_ALLOW_OTHERS:false}
