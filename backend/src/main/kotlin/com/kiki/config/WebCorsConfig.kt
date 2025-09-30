@@ -8,7 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebCorsConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000")
+            // Allow local dev and Vercel deployments
+            .allowedOriginPatterns(
+                "http://localhost:3000",
+                "https://kiki-bo32k8vah-ieununes-projects.vercel.app",
+                "https://*.vercel.app"
+            )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
             .allowedHeaders("*")
             .allowCredentials(true)
