@@ -48,3 +48,8 @@
 > [!CAUTION]
 > 비밀 값은 `.env`나 `application-local.yml` 등 로컬 전용 파일에만 두고, git에 커밋하지 마세요. 루트/백엔드 `.gitignore`가 이미 설정되어 있습니다.
 
+---
+> [!NOTE]
+> 본 프로젝트는 AWS Kiro IDE, Codex등 AI의 도움을 받아 제작되었습니다.
+
+
